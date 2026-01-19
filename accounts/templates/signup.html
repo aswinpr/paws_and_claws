@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Signup | Paws and Claws</title>
+    <link rel="stylesheet" href="{% static 'signup_style.css' %}">
+</head>
+<body>
+
+<div class="login-wrapper">
+    <div class="container">
+        <h2>Create Account 🐾</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <label>Username</label>
+            <input type="text" name="username" placeholder="Choose a username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Create a password" required>
+
+            <button type="submit">Register</button>
+        </form>
+
+        <p class="signup-text">
+            Already have an account? <a href="{% url 'login' %}">Login</a>
+        </p>
+    </div>
+</div>
+
+</body>
+</html>

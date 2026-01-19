@@ -1,0 +1,288 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paws and Claws</title>
+    <link rel="stylesheet" href="{% static 'home_style.css' %}">
+</head>
+<body >
+    <div class="nav">
+    <h3>Paws and Claws</h3>
+
+  <!-- Desktop Menu -->
+  <ul class="nav-links">
+    <li><a href="#home"><span style="color: brown;">Home</span></a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="{% url 'shop' %}">Shop</a></li>
+    <li><a href="{% url 'services' %}">Services</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+
+    <div class="btns">
+        {% if user.is_authenticated %}
+            <span class="welcome">Hi, {{ user.username }}</span>
+            <button><a href="{% url 'logout' %}">Logout</a></button>
+        {% else %}
+            <button><a href="{% url 'login' %}">Login</a></button>
+            <button><a href="{% url 'signup' %}">Register</a></button>
+        {% endif %}
+    </div>
+
+
+  <!-- Hamburger -->
+  <div class="hamburger" onclick="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<!-- Mobile Menu -->
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#">Home</a>
+  <a href="#about">About</a>
+  <a href="{% url 'shop' %}">Shop</a>
+  <a href="{% url 'services' %}">Services</a>
+  <a href="#contact">Contact</a>
+
+  <!-- Divider -->
+  <div class="mobile-divider"></div>
+
+  <!-- Auth Buttons -->
+  
+  {% if user.is_authenticated %}
+    <span class="mobile-user">Welcome, {{ user.username }}</span>
+    <a href="{% url 'logout' %}" class="mobile-btn logout">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="mobile-btn login">Login</a>
+    <a href="{% url 'signup' %}" class="mobile-btn register">Register</a>
+  {% endif %}
+
+
+</div>
+
+
+
+    <div class="main_section" id="home">
+        <div class="main-container">
+                <div class="left">
+                    <h1>Where Happy Pets <br><span>Find Their Favorite Things</span></h1>
+
+                    <a href="{% url 'shop' %}" class="hero-btn">Shop Now</a>
+                </div>
+
+                <div class="right">
+            
+                    <img src="https://images.unsplash.com/photo-1548199973-03cce0bbc87b?auto=format&fit=crop&w=900&q=80"
+                    alt="Dog and cat together" />
+
+                </div>
+        </div>
+    </div>
+        
+
+
+    <section class="about" id="about">
+        <div class="about-container">
+            <div class="about-text">
+                <h1>About <span>Paws and Claws</span></h1>
+
+                <p>
+                    At <strong>Paws and Claws</strong>, we believe pets are family.
+                    Our mission is to provide high-quality products that keep your
+                    furry friends happy, healthy, and loved.
+                </p>
+
+                <p>
+                    From nutritious food and cozy accessories to fun toys and
+                    grooming essentials, we carefully select every item with
+                    your pet’s comfort in mind.
+                </p>
+
+                <p>
+                    Because when pets are happy, homes are happier 🐶🐱
+                </p>
+
+                <a href="{% url 'shop' %}" class="btn">Explore Products</a>
+            </div>
+
+            <div class="about-image">
+                <img src="https://images.unsplash.com/photo-1518717758536-85ae29035b6d?auto=format&fit=crop&w=900&q=80" alt="Happy Pet">
+            </div>
+        </div>
+    </section>
+
+    <section class="contact" id="contact">
+  <div class="contact-container">
+
+    <!-- Left: Contact Info -->
+    <div class="contact-text">
+      <h1>Get in <span>Touch</span></h1>
+
+      <p>
+        Have questions about our products or services?  
+        We’re always happy to help you and your furry friends 🐾
+      </p>
+
+      <div class="contact-info">
+        <p><strong>Email:</strong> support@pawsandclaws.com</p>
+        <p><strong>Phone:</strong> +91 9495855989</p>
+        <p><strong>Address:</strong> Kochi, Kerala, India</p>
+      </div>
+    </div>
+
+    <!-- Right: Contact Form -->
+    <div class="contact-form">
+      <form>
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="5" placeholder="Your Message"></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+  </div>
+</section>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-grid">
+
+            <!-- Brand -->
+            <div class="footer-brand">
+                <div class="brand">
+                <!-- Paw Icon -->
+                <svg class="icon primary" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="12" cy="14" r="4"></circle>
+                    <circle cx="5" cy="8" r="2"></circle>
+                    <circle cx="19" cy="8" r="2"></circle>
+                    <circle cx="7" cy="5" r="1.5"></circle>
+                    <circle cx="17" cy="5" r="1.5"></circle>
+                </svg>
+                <span class="brand-name">Paws & Claws</span>
+                </div>
+
+                <p class="brand-text">
+                Your trusted partner for premium pet products since 2015.
+                </p>
+
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">
+                        <svg viewBox="0 0 24 24" class="social-icon">
+                        <path d="M22 12a10 10 0 1 0-11.5 9.9v-7h-2v-3h2V9.5c0-2 1.2-3.1 3-3.1.9 0 1.8.1 1.8.1v2h-1c-1 0-1.3.6-1.3 1.2V11h2.3l-.4 3h-1.9v7A10 10 0 0 0 22 12Z"/>
+                        </svg>
+                    </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <svg viewBox="0 0 24 24" class="social-icon">
+                        <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm5 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10Zm6-1.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z"/>
+                        </svg>
+                    </a>
+
+                    <a href="#" aria-label="Twitter">
+                        <svg viewBox="0 0 24 24" class="social-icon">
+                        <path d="M22 5.8c-.8.4-1.6.6-2.5.8a4.3 4.3 0 0 0 1.9-2.4 8.6 8.6 0 0 1-2.7 1A4.3 4.3 0 0 0 12 9a12.2 12.2 0 0 1-8.8-4.5 4.3 4.3 0 0 0 1.3 5.7c-.6 0-1.2-.2-1.7-.5v.1a4.3 4.3 0 0 0 3.4 4.2c-.5.1-1 .2-1.6.1a4.3 4.3 0 0 0 4 3 8.6 8.6 0 0 1-5.3 1.8A8.8 8.8 0 0 1 2 18.8a12.1 12.1 0 0 0 6.6 1.9c8 0 12.3-6.6 12.3-12.3v-.6c.8-.5 1.5-1.2 2.1-2Z"/>
+                        </svg>
+                    </a>
+                </div>
+
+            </div>
+
+      <!-- Quick Links -->
+      <div>
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Shop All</a></li>
+          <li><a href="#">New Arrivals</a></li>
+          <li><a href="#">Best Sellers</a></li>
+          <li><a href="#">Sale</a></li>
+        </ul>
+      </div>
+
+      <!-- Categories -->
+      <div>
+        <h3>Categories</h3>
+        <ul>
+          <li><a href="#">Pet Food</a></li>
+          <li><a href="#">Toys</a></li>
+          <li><a href="#">Accessories</a></li>
+          <li><a href="#">Grooming</a></li>
+        </ul>
+      </div>
+
+      <!-- Support -->
+      <div>
+        <h3>Support</h3>
+        <ul>
+          <li><a href="#">Contact Us</a></li>
+          <li><a href="#">FAQs</a></li>
+          <li><a href="#">Shipping Info</a></li>
+          <li><a href="#">Returns</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+        <div class="footer-bottom">
+        <p>© 2026 Paws & Claws. All rights reserved.</p>
+        </div>
+     </div>
+    </footer>
+
+
+    <script>
+    function toggleMenu() {
+        document.getElementById("mobileMenu").classList.toggle("active");
+    }
+
+    function smoothScroll(target, duration = 1200) {
+    const targetPosition = target.getBoundingClientRect().top;
+    const startPosition = window.pageYOffset;
+    const startTime = performance.now();
+
+    function easeInOut(t) {
+      return t < 0.5
+        ? 2 * t * t
+        : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    function animation(currentTime) {
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeInOut(progress);
+
+      window.scrollTo(
+        0,
+        startPosition + targetPosition * ease
+      );
+
+      if (timeElapsed < duration) {
+        requestAnimationFrame(animation);
+      }
+    }
+
+    requestAnimationFrame(animation);
+  }
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute("href"));
+      if (target) {
+        smoothScroll(target, 100); // ⬅ Increase for slower scroll
+      }
+
+      // Close mobile menu if open
+      document.getElementById("mobileMenu")?.classList.remove("active");
+    });
+  });
+    </script>
+
+
+
+</body>
+</html>

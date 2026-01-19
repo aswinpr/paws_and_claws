@@ -1,0 +1,103 @@
+/* ===== Base ===== */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(120deg, #fff, #eacab3);
+    height: 100vh;
+}
+
+/* ===== Center Wrapper ===== */
+.login-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ===== Card ===== */
+.container {
+    background: #fff;
+    padding: 40px 35px;
+    width: 100%;
+    max-width: 380px;
+    border-radius: 18px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* ===== Heading ===== */
+.container h2 {
+    margin-bottom: 25px;
+    color: #A52A2A;
+    font-size: 2rem;
+}
+
+/* ===== Labels ===== */
+.container label {
+    display: block;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #000;
+}
+
+/* ===== Inputs ===== */
+.container input {
+    width: 100%;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    border-radius: 10px;
+    border: 2px solid #EB9456;
+    outline: none;
+    font-size: 1rem;
+}
+
+.container input:focus {
+    border-color: #A52A2A;
+}
+
+/* ===== Button ===== */
+.container button {
+    width: 100%;
+    padding: 12px;
+    background: #A52A2A;
+    color: #fff;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.container button:hover {
+    background: #EB9456;
+    color: #000;
+}
+
+/* ===== Signup Text ===== */
+.signup-text {
+    margin-top: 18px;
+    font-size: 0.95rem;
+}
+
+.signup-text a {
+    color: #A52A2A;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+/* ===== Mobile ===== */
+@media (max-width: 480px) {
+    .container {
+        padding: 30px 22px;
+    }
+}

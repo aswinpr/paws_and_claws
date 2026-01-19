@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Services | Paws & Claws</title>
+  <link rel="stylesheet" href="{% static 'services_style.css' %}"/>
+</head>
+<body>
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Our Services</h1>
+  <p>Professional pet care services to keep your furry friends happy and healthy</p>
+</section>
+
+<main class="container">
+
+  <!-- GROOMING -->
+  <section class="service-card">
+    <div class="service-grid">
+      <div class="service-content">
+        <h2>✂️ Pet Grooming</h2>
+        <p>
+          Professional grooming services using premium pet-safe products.
+        </p>
+
+        <div class="service-list">
+          <div><span>Basic Bath</span><strong>$30</strong></div>
+          <div><span>Full Grooming</span><strong>$55</strong></div>
+          <div><span>Spa Package</span><strong>$80</strong></div>
+          <div><span>Nail Trim</span><strong>$15</strong></div>
+        </div>
+
+        <button class="primary-btn" onclick="openBooking('grooming')">
+          Book Grooming
+        </button>
+      </div>
+
+      <img src="https://images.unsplash.com/photo-1516734212186-a967f81ad0d7?w=800&auto=format&fit=crop&q=80" alt="Grooming">
+    </div>
+  </section>
+
+  <!-- HOSTEL -->
+  <section class="service-card">
+    <div class="service-grid reverse">
+      <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=800&auto=format&fit=crop&q=80" alt="Pet Hostel">
+
+      <div class="service-content">
+        <h2>🏠 Pet Hostel</h2>
+        <p>
+          A safe and comfortable home-away-from-home for your pets.
+        </p>
+
+        <ul class="features">
+          <li>✔️ Private Suites</li>
+          <li>✔️ 24/7 Supervision</li>
+          <li>✔️ Daily Playtime</li>
+        </ul>
+
+        <div class="rates">
+          <div><span>Small Dog / Cat</span><strong>$35/night</strong></div>
+          <div><span>Medium Dog</span><strong>$45/night</strong></div>
+          <div><span>Large Dog</span><strong>$55/night</strong></div>
+          <div><span>XL Dog</span><strong>$65/night</strong></div>
+        </div>
+
+        <button class="primary-btn" onclick="openBooking('hostel')">
+          Book Hostel
+        </button>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- BOOKING MODAL -->
+<div class="modal" id="bookingModal">
+  <div class="modal-content">
+    <h2 id="modalTitle">Book Service</h2>
+
+    <form id="bookingForm">
+      <label>Pet Name *</label>
+      <input type="text" id="petName" required>
+
+      <label>Pet Type *</label>
+      <select id="petType" required>
+        <option value="">Select</option>
+        <option>Dog</option>
+        <option>Cat</option>
+        <option>Bird</option>
+        <option>Rabbit</option>
+      </select>
+
+      <label id="dateLabel">Appointment Date *</label>
+      <input type="date" id="startDate" required>
+
+      <div id="timeSlotField">
+        <label>Time Slot *</label>
+        <select id="timeSlot">
+          <option value="">Select Time</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>2:00 PM</option>
+          <option>3:00 PM</option>
+        </select>
+      </div>
+
+      <div id="endDateField">
+        <label>Check-out Date *</label>
+        <input type="date" id="endDate">
+      </div>
+
+      <label>Notes</label>
+      <textarea rows="3"></textarea>
+
+      <button type="submit" class="primary-btn">Confirm Booking</button>
+      <button type="button" class="secondary-btn" onclick="closeBooking()">Cancel</button>
+    </form>
+  </div>
+</div>
+
+<script src="{% static 'services.js' %}"></script>
+</body>
+</html>

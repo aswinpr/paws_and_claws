@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Your Cart</h2>
+
+{% if items %}
+    {% for item in items %}
+        <div>
+            <img src="{{ item.image }}" width="80">
+            <h4>{{ item.name }}</h4>
+            <p>₹{{ item.price }} × {{ item.quantity }}</p>
+        </div>
+    {% endfor %}
+
+    <h3>Total: ₹{{ total }}</h3>
+{% else %}
+    <p>Your cart is empty</p>
+{% endif %}
+
+</body>
+</html>

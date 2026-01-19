@@ -1,0 +1,666 @@
+/* ======================
+   Global Styles
+====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  color: #2b2b2b;
+  background-color: #fffaf5;
+}
+
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* ======================
+   Navbar
+====================== */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 60px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #8b4513;
+}
+
+.nav ul {
+  list-style: none;
+  display: flex;
+  gap: 30px;
+}
+
+.nav ul li a {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+.nav ul li a:hover {
+  color: #c2410c;
+}
+
+.btns {
+  display: flex;
+  gap: 12px;
+}
+
+.btns button {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid #c2410c;
+  background: transparent;
+  color: #c2410c;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.btns button:hover {
+  background: #c2410c;
+  color: #fff;
+}
+
+/* ======================
+   Hamburger Menu
+====================== */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #c2410c;
+  border-radius: 3px;
+  transition: 0.3s;
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 70px;
+  right: -100%;
+  width: 100%;
+  height: calc(100vh - 70px);
+  background: #fffaf5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  transition: right 0.4s ease;
+  z-index: 99;
+}
+
+.mobile-menu a {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #2b2b2b;
+}
+
+.mobile-menu a:hover {
+  color: #c2410c;
+}
+
+/* Show menu */
+.mobile-menu.active {
+  right: 0;
+}
+
+/* Divider */
+.mobile-divider {
+  width: 60%;
+  height: 1px;
+  background: #fde68a;
+  margin: 10px 0;
+}
+
+/* Auth Buttons */
+.mobile-btn {
+  width: 220px;
+  text-align: center;
+  padding: 14px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Login */
+.mobile-btn.login {
+  border: 2px solid #c2410c;
+  color: #c2410c;
+}
+
+/* Register */
+.mobile-btn.register {
+  background: #c2410c;
+  color: #fff;
+}
+
+.mobile-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.15);
+}
+
+.welcome,
+.mobile-user {
+    font-weight: bold;
+    color: #333;
+    padding-top: 7.5px;
+    margin-right: 10px;
+}
+
+/* ======================
+   Responsive
+====================== */
+@media (max-width: 900px) {
+  .nav-links,
+  .btns {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+}
+
+
+
+/* ======================
+   Hero Section
+====================== */
+/* ======================
+   Hero Section (Styled)
+====================== */
+/* ======================
+   Shared Section Styles
+====================== */
+.main-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  align-items: center;
+  gap: 200px;
+}
+
+.main_section {
+  background: linear-gradient(to right, #fff7ed, #ffedd5);
+}
+
+.main_section,
+.about {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 90px 90px;
+}
+
+.left,
+.about-text {
+  max-width: 520px;
+}
+
+.right img,
+.about-image img {
+  border-radius: 28px;
+  box-shadow: 0 28px 55px rgba(0,0,0,0.18);
+}
+
+/* ======================
+   Main Section (Hero)
+====================== */
+.main_section {
+  justify-content: space-between;
+  background: linear-gradient(to right, #fff7ed, #ffedd5);
+}
+
+.left h1 {
+  font-size: 3.1rem;
+  line-height: 1.2;
+  margin-bottom: 28px;
+  color: #2b2b2b;
+}
+
+.left h1 span {
+  color: #c2410c;
+}
+
+.hero-btn {
+  display: inline-block;
+  padding: 14px 36px;
+  border-radius: 30px;
+  background: #c2410c;
+  color: #fff;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.hero-btn:hover {
+  background: #9a3412;
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px rgba(0,0,0,0.2);
+}
+
+.right img {
+  max-width: 460px;
+
+}
+
+/* ======================
+   About Section (Matching Look)
+====================== */
+.about {
+  background: linear-gradient(to right, #fffaf5, #fff);
+}
+
+.about-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  gap: 200px;
+  align-items: center;
+}
+
+.about-text h1 {
+  font-size: 2.8rem;
+  margin-bottom: 24px;
+  color: #2b2b2b;
+}
+
+.about-text h1 span {
+  color: #c2410c;
+}
+
+.about-text p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.about-text .btn {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 13px 32px;
+  border-radius: 30px;
+  background: #c2410c;
+  color: #fff;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.about-text .btn:hover {
+  background: #9a3412;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+}
+
+.about-image img {
+  max-width: 440px;
+}
+
+/* ======================
+   Animations (Unified)
+====================== */
+.left,
+.about-text {
+  animation: fadeInLeft 1s ease;
+}
+
+.right,
+.about-image {
+  animation: fadeInRight 1s ease;
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ======================
+   Responsive
+====================== */
+@media (max-width: 900px) {
+    .main-container {
+        grid-template-columns: 1fr;
+        gap: 50px;
+        text-align: center;
+    }
+
+  .main_section,
+  .about {
+    flex-direction: column;
+    text-align: center;
+    padding: 70px 30px;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .right img,
+  .about-image img {
+    max-width: 320px;
+    margin: auto;
+  }
+
+  .left h1 {
+    font-size: 2.4rem;
+  }
+
+  .about-text h1 {
+    font-size: 2.2rem;
+  }
+}
+
+
+
+
+/* ======================
+   Contact Section
+====================== */
+.contact {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 90px 90px;
+  background: linear-gradient(to right, #fff7ed, #ffedd5);
+}
+
+.contact-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr;
+  gap: 200px;
+  align-items: center;
+}
+
+.contact-text {
+  max-width: 520px;
+}
+
+.contact-text h1 {
+  font-size: 2.8rem;
+  margin-bottom: 24px;
+  color: #2b2b2b;
+}
+
+.contact-text h1 span {
+  color: #c2410c;
+}
+
+.contact-text p {
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.65;
+  margin-bottom: 20px;
+}
+
+.contact-info p {
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+  color: #444;
+}
+
+/* Contact Form */
+.contact-form {
+  background: #fff;
+  padding: 40px;
+  border-radius: 28px;
+  box-shadow: 0 28px 55px rgba(0,0,0,0.15);
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #c2410c;
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 30px;
+  border: none;
+  background: #c2410c;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.contact-form button:hover {
+  background: #9a3412;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px rgba(0,0,0,0.18);
+}
+
+/* ======================
+   Contact Animations
+====================== */
+.contact-text {
+  animation: fadeInLeft 1s ease;
+}
+
+.contact-form {
+  animation: fadeInRight 1s ease;
+}
+
+/* ======================
+   Responsive
+====================== */
+@media (max-width: 900px) {
+  .contact {
+    padding: 70px 30px;
+    text-align: center;
+  }
+
+  .contact-container {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .contact-form {
+    padding: 30px;
+  }
+}
+
+
+
+
+/* ======================
+   Footer
+====================== */
+.footer {
+  background: #fff7ed;
+  border-top: 1px solid #fde68a;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 60px 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.brand-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.icon {
+  width: 28px;
+  height: 28px;
+}
+
+.primary {
+  color: #c2410c;
+}
+
+.brand-text {
+  font-size: 0.9rem;
+  color: #6b7280;
+  margin-bottom: 15px;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+}
+
+.social-links a {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fde68a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.social-icon {
+  width: 18px;
+  height: 18px;
+  fill: #000;
+}
+
+.social-links a:hover {
+  background: #c2410c;
+  transform: translateY(-3px);
+}
+
+.social-links a:hover .social-icon {
+  fill: #fff;
+}
+
+
+.footer h3 {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.footer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer ul li {
+  margin-bottom: 8px;
+}
+
+.footer ul li a {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.footer ul li a:hover {
+  color: #c2410c;
+}
+
+.footer-bottom {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #fde68a;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* ======================
+   Responsive
+====================== */
+@media (max-width: 900px) {
+  .main_section {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .about-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .nav {
+    padding: 15px 30px;
+  }
+
+  .nav ul {
+    display: none;
+  }
+}

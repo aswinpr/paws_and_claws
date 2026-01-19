@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+    <style>
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            display: flex;
+            gap: 30px;
+        }
+        img {
+            width: 350px;
+            border-radius: 10px;
+        }
+        .details h1 {
+            margin-bottom: 10px;
+        }
+        .price {
+            color: green;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        button {
+            padding: 10px 20px;
+            background: black;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img src="{{ product.image }}" alt="{{ product.name }}">
+
+    <div class="details">
+        <h1>{{ product.name }}</h1>
+        <p class="price">₹{{ product.price }}</p>
+        <p>{{ product.description }}</p>
+        <p><b>Category:</b> {{ product.category }}</p>
+        <p><b>Stock:</b> {{ product.stock }}</p>
+
+        {% if user.is_authenticated %}
+            <button>Add to Cart</button>
+        {% else %}
+            <a href="{% url 'login' %}">Login to Buy</a>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,147 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products | Paws & Claws</title>
+  <link rel="stylesheet" href="{% static 'products_style.css' %}"/>
+</head>
+<body>
+
+
+<!-- TOP BAR -->
+<div class="top-bar">
+
+  {% if not user.is_staff %}
+  <a href="#" class="cart-icon">
+    🛒 <span>0</span>
+  </a>
+  {% endif %}
+
+  {% if user.is_staff %}
+  <a href="{% url 'add_product' %}" class="add-product-btn">
+    ➕ Add Product
+  </a>
+  {% endif %}
+
+</div>
+
+
+
+<!-- PAGE HEADER -->
+<section class="page-header">
+  <h1>Our Products</h1>
+  <p>Browse our complete collection of products</p>
+</section>
+
+
+<!-- CATEGORY FILTER -->
+<section class="filters">
+  <button class="filter active" data-category="all">All</button>
+  <button class="filter" data-category="food">Food</button>
+  <button class="filter" data-category="toys">Toys</button>
+  <button class="filter" data-category="accessories">Accessories</button>
+</section>
+
+
+<!-- PRODUCTS -->
+    <section class="products-section">
+      <p id="count"></p>
+
+            <div class="products-grid">
+        {% for product in products %}
+        <div class="product-card" data-category="{{ product.category|lower }}">
+
+          
+          <div class="product-image">
+            <img src="{{ product.image }}" alt="{{ product.name }}">
+          </div>
+
+          <span class="category">{{ product.category|title }}</span>
+
+          <h3>{{ product.name }}</h3>
+          <p class="desc">{{ product.description|truncatechars:60 }}</p>
+
+          <div class="price-row">
+            <span class="price">₹{{ product.price }}</span>
+            <div class="action-buttons">
+              <a href="{% url 'product_detail' product_id=product.id %}" class="view-details-btn">View Details</a>
+              
+              <a href="{% url 'add_to_cart' product.id %}">
+                  <button>Add to Cart</button>
+              </a>
+
+            </div>
+          </div>
+
+        </div>
+        {% empty %}
+          <p>No products available</p>
+        {% endfor %}
+      </div>
+
+    </section>
+
+
+<script src="{% static 'products.js' %}"></script>
+<script>
+  // Inline fallback to ensure filter works
+  document.addEventListener("DOMContentLoaded", function() {
+    var filterButtons = document.querySelectorAll(".filter");
+    var productCards = document.querySelectorAll(".product-card");
+    var countEl = document.getElementById("count");
+
+    if (filterButtons.length === 0 || productCards.length === 0) {
+      return;
+    }
+
+    function updateCount(visible, total) {
+      if (countEl) {
+        countEl.textContent = "Showing " + visible + " of " + total;
+      }
+    }
+
+    function filterProducts(category) {
+      var visible = 0;
+      var total = productCards.length;
+      
+      for (var i = 0; i < productCards.length; i++) {
+        var card = productCards[i];
+        var cardCategory = card.getAttribute("data-category");
+        
+        if (category === "all" || !category) {
+          card.style.display = "flex";
+          visible++;
+        } else {
+          var cardCatLower = cardCategory ? cardCategory.toLowerCase().trim() : "";
+          var selectedCatLower = category ? category.toLowerCase().trim() : "";
+          
+          if (cardCatLower === selectedCatLower) {
+            card.style.display = "flex";
+            visible++;
+          } else {
+            card.style.display = "none";
+          }
+        }
+      }
+
+      updateCount(visible, total);
+    }
+
+    for (var i = 0; i < filterButtons.length; i++) {
+      filterButtons[i].addEventListener("click", function() {
+        for (var j = 0; j < filterButtons.length; j++) {
+          filterButtons[j].classList.remove("active");
+        }
+        this.classList.add("active");
+        filterProducts(this.getAttribute("data-category"));
+      });
+    }
+
+    // Initialize - show all products
+    filterProducts("all");
+  });
+</script>
+</body>
+</html>
