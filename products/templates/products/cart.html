@@ -1,26 +1,64 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Your Cart | Paws & Claws</title>
+    <link rel="stylesheet" href="{% static 'cart_style.css' %}">
 </head>
 <body>
-    <h2>Your Cart</h2>
 
-{% if items %}
-    {% for item in items %}
-        <div>
-            <img src="{{ item.image }}" width="80">
-            <h4>{{ item.name }}</h4>
-            <p>₹{{ item.price }} × {{ item.quantity }}</p>
+<section class="cart-container">
+
+  <h2>Your Cart</h2>
+
+  {% if items %}
+    <div class="cart-list">
+
+      {% for item in items %}
+      <div class="cart-card">
+
+        <div class="cart-image">
+          <img src="{{ item.image }}" alt="{{ item.name }}">
         </div>
-    {% endfor %}
 
-    <h3>Total: ₹{{ total }}</h3>
-{% else %}
-    <p>Your cart is empty</p>
-{% endif %}
+        <div class="cart-details">
+          <h4>{{ item.name }}</h4>
+          <p class="price">₹{{ item.price }}</p>
+
+          <div class="quantity-control">
+            <a href="{% url 'decrease_qty' item.id %}">
+              <button>-</button>
+            </a>
+
+            <span>{{ item.quantity }}</span>
+
+            <a href="{% url 'increase_qty' item.id %}">
+              <button>+</button>
+            </a>
+          </div>
+
+          <p class="subtotal">
+            ₹{{ item.price }} × {{ item.quantity }} =
+            <strong>₹{{ item.subtotal }}</strong>
+          </p>
+        </div>
+
+      </div>
+      {% endfor %}
+
+    </div>
+
+    <div class="cart-total">
+      <h3>Total: <span>₹{{ total }}</span></h3>
+      <button class="checkout-btn">Proceed to Checkout</button>
+    </div>
+
+  {% else %}
+    <p class="empty-cart">🛒 Your cart is empty</p>
+  {% endif %}
+
+</section>
 
 </body>
 </html>

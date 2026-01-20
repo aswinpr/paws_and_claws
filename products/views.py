@@ -4,7 +4,10 @@ from django.shortcuts import render, redirect
 from bson import ObjectId
 from .db import products_collection, cart_collection
 
-@login_required(login_url='login')
+
+
+
+# @login_required(login_url='login')
 def shop(request):
     products = list(products_collection.find())
     # Convert ObjectId to string for each product
@@ -49,14 +52,24 @@ def product_detail(request, product_id):
 
 
 
+
+
+
 @login_required(login_url='login')
 def add_to_cart(request, product_id):
     user_id = request.user.id
 
-    product = products_collection.find_one({"_id": ObjectId(product_id)})
+    product = products_collection.find_one(
+        {"_id": ObjectId(product_id)}
+    )
 
+    # ❌ Product not found
     if not product:
         return redirect("shop")
+
+    # ❌ Out of stock
+    if product.get("stock", 0) <= 0:
+        return redirect("shop")  # later show message
 
     cart_item = cart_collection.find_one({
         "user_id": user_id,
@@ -64,19 +77,27 @@ def add_to_cart(request, product_id):
     })
 
     if cart_item:
+        # Increase cart quantity
         cart_collection.update_one(
             {"_id": cart_item["_id"]},
             {"$inc": {"quantity": 1}}
         )
     else:
+        # Add new item to cart
         cart_collection.insert_one({
             "user_id": user_id,
             "product_id": product["_id"],
             "name": product["name"],
             "price": product["price"],
-            "image": product["image"],
+            "image": product.get("image"),
             "quantity": 1
         })
+
+    # ✅ REDUCE STOCK BY 1
+    products_collection.update_one(
+        {"_id": product["_id"]},
+        {"$inc": {"stock": -1}}
+    )
 
     return redirect("cart")
 
@@ -86,9 +107,73 @@ def cart(request):
     user_id = request.user.id
     items = list(cart_collection.find({"user_id": user_id}))
 
-    total = sum(item["price"] * item["quantity"] for item in items)
+    total = 0
+    for item in items:
+        item["id"] = str(item["_id"])
+        del item["_id"]
+
+        item["subtotal"] = item["price"] * item["quantity"]
+        total += item["subtotal"]
 
     return render(request, "products/cart.html", {
         "items": items,
         "total": total
     })
+
+
+
+@login_required(login_url='login')
+def increase_qty(request, item_id):
+    cart_item = cart_collection.find_one({"_id": ObjectId(item_id)})
+
+    if not cart_item:
+        return redirect("cart")
+
+    product = products_collection.find_one(
+        {"_id": cart_item["product_id"]}
+    )
+
+    # Check stock
+    if product["stock"] <= 0:
+        return redirect("cart")
+
+    # Increase cart quantity
+    cart_collection.update_one(
+        {"_id": cart_item["_id"]},
+        {"$inc": {"quantity": 1}}
+    )
+
+    # Reduce product stock
+    products_collection.update_one(
+        {"_id": product["_id"]},
+        {"$inc": {"stock": -1}}
+    )
+
+    return redirect("cart")
+
+
+
+@login_required(login_url='login')
+def decrease_qty(request, item_id):
+    cart_item = cart_collection.find_one({"_id": ObjectId(item_id)})
+
+    if not cart_item:
+        return redirect("cart")
+
+    # Restore stock
+    products_collection.update_one(
+        {"_id": cart_item["product_id"]},
+        {"$inc": {"stock": 1}}
+    )
+
+    if cart_item["quantity"] > 1:
+        cart_collection.update_one(
+            {"_id": cart_item["_id"]},
+            {"$inc": {"quantity": -1}}
+        )
+    else:
+        # Remove item if quantity becomes 0
+        cart_collection.delete_one({"_id": cart_item["_id"]})
+
+    return redirect("cart")
+
