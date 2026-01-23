@@ -1,4 +1,4 @@
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse, Http404,JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from bson import ObjectId
@@ -177,3 +177,17 @@ def decrease_qty(request, item_id):
 
     return redirect("cart")
 
+
+
+@login_required
+def cart_count_api(request):
+    user_id = request.user.id
+    items = cart_collection.find({"user_id": user_id})
+
+    total_qty = 0
+    for item in items:
+        total_qty += item.get("quantity", 1)
+
+    return JsonResponse({
+        "cart_count": total_qty
+    })

@@ -14,8 +14,8 @@
 <div class="top-bar">
 
   {% if not user.is_staff %}
-  <a href="#" class="cart-icon">
-    🛒 <span>0</span>
+  <a href="{% url 'cart' %}" class="cart-icon">
+    🛒 <span>{{ cart_count }}</span>
   </a>
   {% endif %}
 
@@ -142,6 +142,30 @@
     // Initialize - show all products
     filterProducts("all");
   });
+
+
+  function refreshCartCount() {
+  fetch("{% url 'cart_count_api' %}", {
+    method: "GET",
+    headers: {
+      "X-Requested-With": "XMLHttpRequest"
+    }
+  })
+  .then(response => response.json())
+  .then(data => {
+    const el = document.getElementById("cart-count");
+    if (el) {
+      el.textContent = data.cart_count;
+    }
+  })
+  .catch(err => console.error("Cart count error:", err));
+}
+
+// Call on page load
+document.addEventListener("DOMContentLoaded", function () {
+  refreshCartCount();
+});
+
 </script>
 </body>
 </html>
