@@ -1,0 +1,232 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dog Grooming</title>
+</head>
+<body>
+
+<h1>Dog Grooming</h1>
+
+<!-- GROOMING -->
+<section class="service-card">
+  <div class="service-content">
+    <h2>✂️ Pet Grooming</h2>
+    <h3>Dog Grooming Packages</h3>
+    <p>Choose a package that fits your pet’s needs.</p>
+
+    <div class="grooming-packages">
+
+      <!-- Spa Bath -->
+      <article class="package-card">
+        <div class="package-header">
+          <div class="package-title">
+            <span class="package-icon">🛁</span>
+            <span class="package-name">Spa Bath</span>
+          </div>
+          <div class="package-price">
+            <div class="package-mrp">₹1198</div>
+            <div class="package-now">₹999</div>
+          </div>
+        </div>
+
+        <ul class="package-features">
+          <li>✓ Bath With Shampoo &amp; Conditioner</li>
+          <li>✓ Blow Dry</li>
+          <li>✓ Nail Clipping</li>
+          <li>✓ Ear Cleaning</li>
+          <li>✓ Eyes Cleaning</li>
+          <li>✓ Paw Massage</li>
+          <li>✓ Combing/Brushing</li>
+        </ul>
+
+        <button class="book-btn"
+          onclick="openBookingModal('dog_grooming','Spa Bath',999)">
+          Book now
+        </button>
+      </article>
+
+      <!-- Bath + Basic Grooming -->
+      <article class="package-card">
+        <div class="package-header">
+          <div class="package-title">
+            <span class="package-icon">🛁</span>
+            <span class="package-name">Bath + Basic Grooming</span>
+          </div>
+          <div class="package-price">
+            <div class="package-mrp">₹1798</div>
+            <div class="package-now">₹1499</div>
+          </div>
+        </div>
+
+        <ul class="package-features">
+          <li>✓ Bath With Shampoo &amp; Conditioner</li>
+          <li>✓ Blow Dry</li>
+          <li>✓ Face Haircutting</li>
+          <li>✓ Sanitary Trim</li>
+          <li>✓ Nail Clipping</li>
+          <li>✓ Ear Cleaning</li>
+          <li>✓ Eye Cleaning</li>
+          <li>✓ Teeth Cleaning/Mouth Spray</li>
+          <li>✓ Paw Massage</li>
+          <li>✓ Combing/Brushing</li>
+        </ul>
+
+        <button class="book-btn"
+          onclick="openBookingModal('dog_grooming','Bath + Basic Grooming',1499)">
+          Book now
+        </button>
+      </article>
+
+      <!-- Full Service -->
+      <article class="package-card">
+        <div class="package-header">
+          <div class="package-title">
+            <span class="package-icon">🐶</span>
+            <span class="package-name">Full Service</span>
+            <span class="package-badge">Full Service</span>
+          </div>
+          <div class="package-price">
+            <div class="package-mrp">₹2398</div>
+            <div class="package-now">₹1999</div>
+          </div>
+        </div>
+
+        <ul class="package-features">
+          <li>✓ Bath With Shampoo &amp; Conditioner</li>
+          <li>✓ Blow Dry</li>
+          <li>✓ Full body Trimming/Zero Haircut</li>
+          <li>✓ Eye Cleaning</li>
+          <li>✓ Ear Cleaning</li>
+          <li>✓ Body Massage</li>
+          <li>✓ Sanitary Trim</li>
+          <li>✓ Nail Clipping</li>
+          <li>✓ Teeth Cleaning/Mouth Spray</li>
+          <li>✓ Paw Massage</li>
+          <li>✓ Combing/Brushing</li>
+        </ul>
+
+        <button class="book-btn"
+          onclick="openBookingModal('dog_grooming','Full Service',1999)">
+          Book now
+        </button>
+      </article>
+
+      <!-- PawLuxe -->
+      <article class="package-card">
+        <div class="package-header">
+          <div class="package-title">
+            <span class="package-icon">🐶</span>
+            <span class="package-name">PawLuxe</span>
+          </div>
+          <div class="package-price">
+            <div class="package-mrp">₹2998</div>
+            <div class="package-now">₹2499</div>
+          </div>
+        </div>
+
+        <ul class="package-features">
+          <li>✓ Bath With Shampoo &amp; Conditioner</li>
+          <li>✓ Blow Dry</li>
+          <li>✓ Hair Styling</li>
+          <li>✓ De-Matting</li>
+          <li>✓ Tick Removal By hand</li>
+          <li>✓ Anti-Tick Treatment</li>
+          <li>✓ Eye Cleaning</li>
+          <li>✓ Ear Cleaning</li>
+          <li>✓ Body Massage</li>
+          <li>✓ Sanitary Clipping</li>
+          <li>✓ Nail Clipping</li>
+          <li>✓ Teeth Cleaning/Mouth Spray</li>
+          <li>✓ Paw Massage</li>
+          <li>✓ Combing/Brushing</li>
+        </ul>
+
+        <button class="book-btn"
+          onclick="openBookingModal('dog_grooming','PawLuxe',2499)">
+          Book now
+        </button>
+      </article>
+
+      <!-- Trans-fur-mation -->
+      <article class="package-card">
+        <div class="package-header">
+          <div class="package-title">
+            <span class="package-icon">🍲</span>
+            <span class="package-name">Trans-fur-mation</span>
+          </div>
+          <div class="package-price">
+            <div class="package-mrp">₹1798</div>
+            <div class="package-now">₹1499</div>
+          </div>
+        </div>
+
+        <ul class="package-features">
+          <li>✓ Full Body Trimming</li>
+          <li>✓ Ear Cleaning</li>
+          <li>✓ Eyes Cleaning</li>
+          <li>✓ Nail Clipping</li>
+        </ul>
+
+        <button class="book-btn"
+          onclick="openBookingModal('dog_grooming','Trans-fur-mation',1499)">
+          Book now
+        </button>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- BOOKING MODAL -->
+<div class="modal" id="bookingModal" style="display:none;">
+  <div class="modal-content">
+    <h2 id="modalTitle">Book Service</h2>
+
+    <form id="bookingForm">
+      {% csrf_token %}
+
+      <!-- Hidden fields -->
+      <input type="hidden" id="serviceTypeInput">
+      <input type="hidden" id="packageInput">
+      <input type="hidden" id="priceInput">
+
+      <label>Pet Name *</label>
+      <input type="text" id="petName" required>
+
+      <label>Pet Type *</label>
+      <select id="petType" required>
+        <option value="">Select</option>
+        <option>Dog</option>
+      </select>
+
+      <label id="dateLabel">Appointment Date *</label>
+      <input type="date" id="startDate" required>
+
+      <div id="timeSlotField">
+        <label>Time Slot *</label>
+        <select id="timeSlot">
+          <option value="">Select Time</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>2:00 PM</option>
+          <option>3:00 PM</option>
+        </select>
+      </div>
+
+      <label>Notes</label>
+      <textarea id="notes" rows="3"></textarea>
+
+      <button type="submit">Confirm Booking</button>
+      <button type="button" onclick="closeBooking()">Cancel</button>
+    </form>
+
+  </div>
+</div>
+
+<script src="{% static 'services/services.js' %}"></script>
+</body>
+</html>
