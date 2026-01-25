@@ -1,37 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pet Boarding | Coming Soon</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #f9fafb, #eef2f7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .coming-soon {
+      background: #fff;
+      padding: 50px 40px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .coming-soon h1 {
+      font-size: 34px;
+      color: #ff6b6b;
+      margin-bottom: 15px;
+    }
+
+    .coming-soon h2 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+
+    .coming-soon p {
+      font-size: 16px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #ffecec;
+      color: #ff6b6b;
+      padding: 10px 18px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  </style>
 </head>
 <body>
-    <h1>pet boarding</h1>
-    <!-- HOSTEL -->
-  <section class="service-card">
-    <div class="service-content">
-      <h2>🏠 Pet Hostel</h2>
-      <p>
-        A safe and comfortable home-away-from-home for your pets.
-      </p>
 
-      <ul class="features">
-        <li>✔️ Private Suites</li>
-        <li>✔️ 24/7 Supervision</li>
-        <li>✔️ Daily Playtime</li>
-      </ul>
+  <div class="coming-soon">
+    <h1>🐾 Pet Boarding</h1>
+    <h2>Coming Soon</h2>
 
-      <div class="rates">
-        <div><span>Small Dog / Cat</span><strong>$35/night</strong></div>
-        <div><span>Medium Dog</span><strong>$45/night</strong></div>
-        <div><span>Large Dog</span><strong>$55/night</strong></div>
-        <div><span>XL Dog</span><strong>$65/night</strong></div>
-      </div>
+    <p>
+      We’re preparing a safe, comfortable, and loving
+      home-away-from-home for your pets.  
+      Our boarding service will be available very soon.
+    </p>
 
-      <button class="primary-btn" onclick="openBooking('hostel')">
-        Book Hostel
-      </button>
-    </div>
-  </section>
+    <div class="badge">🚧 Service Under Development</div>
+  </div>
+
 </body>
 </html>
