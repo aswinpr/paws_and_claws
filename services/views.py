@@ -4,6 +4,9 @@ from .db import bookings_collection
 from django.contrib.auth.decorators import login_required
 import json
 from django.http import JsonResponse
+from django.views.decorators.http import require_POST
+from bson import ObjectId
+
 
 
 # Create your views here.
@@ -53,7 +56,54 @@ def create_booking(request):
 
 
 
+@login_required(login_url='login')
+def my_bookings(request):
+    user_id = request.user.id
+
+    raw_bookings = list(bookings_collection.find({"user_id": user_id}))
+
+    bookings = []
+    for b in raw_bookings:
+        b["id"] = str(b["_id"])   # ✅ safe field
+        del b["_id"]              # remove unsafe key
+        bookings.append(b)
+
+    return render(request, "services/my_bookings.html", {
+        "bookings": bookings
+    })
 
 
 
+@login_required(login_url='login')
+@require_POST
+def cancel_booking(request, booking_id):
+    try:
+        user_id = request.user.id
+
+        # Validate ObjectId
+        if not ObjectId.is_valid(booking_id):
+            return JsonResponse({
+                "success": False,
+                "message": "Invalid booking ID"
+            })
+
+        result = bookings_collection.delete_one({
+            "_id": ObjectId(booking_id),
+            "user_id": user_id
+        })
+
+        if result.deleted_count == 1:
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({
+                "success": False,
+                "message": "Booking not found"
+            })
+
+    except Exception as e:
+        print("Cancel Error:", e)   # 👈 THIS WILL SHOW REAL ERROR
+        return JsonResponse({
+            "success": False,
+            "message": "Server error"
+        })
 
