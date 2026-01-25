@@ -1,14 +1,20 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'services/cat_grooming_style.css' %}">
 </head>
 <body>
     <h1>cat grooming</h1>
-    <h3>Cat Grooming packages</h3>
-        <p>Choose a package that fits your pet’s needs.</p>
+    <!-- GROOMING -->
+<section class="service-card">
+  <div class="service-content">
+    <h2>✂️ Pet Grooming</h2>
+    <h3>Cat Grooming Packages</h3>
+    <p>Choose a package that fits your pet’s needs.</p>
 
         <div class="grooming-packages">
           <!-- Bath + Basic -->
@@ -102,7 +108,61 @@
           </article>
         </div>
     </div>
+
+    
+
+    
+  </div>
+</section>
   </section>
+  <!-- BOOKING MODAL -->
+<div class="modal" id="bookingModal" style="display:none;">
+  <div class="modal-content">
+    <h2 id="modalTitle">Book Service</h2>
+
+    <form id="bookingForm">
+      {% csrf_token %}
+
+      <!-- Hidden fields -->
+      <input type="hidden" id="serviceTypeInput">
+      <input type="hidden" id="packageInput">
+      <input type="hidden" id="priceInput">
+
+      <label>Pet Name *</label>
+      <input type="text" id="petName" required>
+
+      <label>Pet Type *</label>
+      <select id="petType" required>
+        <option value="">Select</option>
+        <option>Cat</option>
+      </select>
+
+      <label id="dateLabel">Appointment Date *</label>
+      <input type="date" id="startDate" required>
+
+      <div id="timeSlotField">
+        <label>Time Slot *</label>
+        <select id="timeSlot">
+          <option value="">Select Time</option>
+          <option>9:00 AM</option>
+          <option>10:00 AM</option>
+          <option>11:00 AM</option>
+          <option>2:00 PM</option>
+          <option>3:00 PM</option>
+        </select>
+      </div>
+
+      <label>Notes</label>
+      <textarea id="notes" rows="3"></textarea>
+
+      <button type="submit">Confirm Booking</button>
+      <button type="button" onclick="closeBooking()">Cancel</button>
+    </form>
+
+  </div>
+</div>
+
+<script src="{% static 'services/services.js' %}"></script>
   
 </body>
 </html>
