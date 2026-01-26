@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from bson import ObjectId
 from .db import products_collection, cart_collection,orders_collection
 from datetime import datetime
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 
@@ -245,3 +246,17 @@ def checkout(request):
 @login_required
 def order_success(request):
     return render(request, "products/order_success.html")
+
+
+@staff_member_required
+def admin_orders(request):
+    # Get all orders, newest first
+    orders = list(orders_collection.find().sort("created_at", -1))
+
+    # Convert ObjectId to string for templates
+    for o in orders:
+        o["id"] = str(o["_id"])
+
+    return render(request, "products/admin_orders.html", {
+        "orders": orders
+    })

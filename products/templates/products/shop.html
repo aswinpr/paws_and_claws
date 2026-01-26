@@ -12,6 +12,10 @@
 
 <!-- TOP BAR -->
 <div class="top-bar">
+  {% if user.is_staff %}
+    <a href="{% url 'admin_orders' %}" class="add-product-btn">view Orders</a>
+  {% endif %}
+
 
   {% if not user.is_staff %}
   <a href="{% url 'cart' %}" class="cart-icon">
