@@ -2,7 +2,8 @@ from django.http import HttpResponse, Http404,JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from bson import ObjectId
-from .db import products_collection, cart_collection
+from .db import products_collection, cart_collection,orders_collection
+from datetime import datetime
 
 
 
@@ -191,3 +192,56 @@ def cart_count_api(request):
     return JsonResponse({
         "cart_count": total_qty
     })
+
+@login_required
+def checkout(request):
+    user_id = request.user.id
+
+    # 🔥 Get cart from MongoDB (NOT session)
+    cart_items = list(cart_collection.find({"user_id": user_id}))
+
+    if not cart_items:
+        return redirect("cart")
+
+    items = []
+    total = 0
+
+    for item in cart_items:
+        subtotal = item["price"] * item["quantity"]
+        total += subtotal
+
+        items.append({
+            "product_id": str(item["product_id"]),
+            "name": item["name"],
+            "price": item["price"],
+            "qty": item["quantity"],
+            "subtotal": subtotal
+        })
+
+    if request.method == "POST":
+        order = {
+            "user_id": user_id,
+            "items": items,
+            "total_amount": total,
+            "shipping_name": request.POST.get("name"),
+            "shipping_phone": request.POST.get("phone"),
+            "shipping_address": request.POST.get("address"),
+            "status": "Pending",
+            "created_at": datetime.now()
+        }
+
+        orders_collection.insert_one(order)
+
+        # 🔥 Clear cart from MongoDB
+        cart_collection.delete_many({"user_id": user_id})
+
+        return redirect("order_success")
+
+    return render(request, "products/checkout.html", {
+        "items": items,
+        "total": total
+    })
+
+@login_required
+def order_success(request):
+    return render(request, "products/order_success.html")

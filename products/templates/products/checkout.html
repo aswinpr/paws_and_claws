@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Checkout</h1>
+
+<div class="checkout-container">
+
+  <div class="checkout-left">
+    <h2>Shipping Details</h2>
+
+    <form method="POST">
+      {% csrf_token %}
+
+      <label>Full Name *</label>
+      <input type="text" name="name" required>
+
+      <label>Phone *</label>
+      <input type="text" name="phone" required>
+
+      <label>Address *</label>
+      <textarea name="address" required></textarea>
+
+      <button type="submit" class="primary-btn">
+        Place Order
+      </button>
+    </form>
+  </div>
+
+  <div class="checkout-right">
+    <h2>Order Summary</h2>
+
+    <table width="100%">
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Qty</th>
+          <th>Price</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in items %}
+        <tr>
+          <td>{{ item.name }}</td>
+          <td>{{ item.qty }}</td>
+          <td>₹{{ item.price }}</td>
+          <td>₹{{ item.subtotal }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <h3>Total: ₹{{ total }}</h3>
+  </div>
+
+</div>
+
+</body>
+</html>
+
+
+

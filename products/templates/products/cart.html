@@ -51,7 +51,9 @@
 
     <div class="cart-total">
       <h3>Total: <span>₹{{ total }}</span></h3>
-      <button class="checkout-btn">Proceed to Checkout</button>
+      <button class="checkout-btn">
+        <a href="{% url 'checkout' %}" class="primary-btn">Proceed to Checkout</a>
+      </button>
     </div>
 
   {% else %}
