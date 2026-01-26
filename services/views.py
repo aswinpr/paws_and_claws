@@ -6,6 +6,7 @@ import json
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from bson import ObjectId
+from django.contrib.admin.views.decorators import staff_member_required
 
 
 
@@ -107,3 +108,31 @@ def cancel_booking(request, booking_id):
             "message": "Server error"
         })
 
+@staff_member_required
+def admin_all_bookings(request):
+    bookings = list(bookings_collection.find().sort("created_at", -1))
+
+    # Convert ObjectId to string for templates
+    for b in bookings:
+        b["id"] = str(b["_id"])
+
+    return render(request, "services/admin_all_bookings.html", {
+        "bookings": bookings
+    })
+
+
+@staff_member_required
+def admin_cancel_booking(request, booking_id):
+    try:
+        result = bookings_collection.delete_one({
+            "_id": ObjectId(booking_id)
+        })
+
+        if result.deleted_count == 1:
+            return JsonResponse({"success": True})
+        else:
+            return JsonResponse({"success": False, "message": "Booking not found"})
+
+    except Exception as e:
+        print("Admin Cancel Error:", e)
+        return JsonResponse({"success": False, "message": "Server error"})

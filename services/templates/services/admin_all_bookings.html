@@ -1,0 +1,100 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - All Bookings</title>
+  <link rel="stylesheet" href="{% static 'services/admin_booking_panel.css' %}">
+  <style>
+    table { width: 100%; border-collapse: collapse; }
+    th, td { border: 1px solid #ccc; padding: 8px; }
+    th { background: #f5f5f5; }
+    .cancel-btn { background: #e74c3c; color: white; border: none; padding: 6px 10px; cursor: pointer; }
+    .status-cancelled { color: red; font-weight: bold; }
+    .status-active { color: green; font-weight: bold; }
+  </style>
+
+</head>
+<body>
+
+<h1>🐾 All Bookings</h1>
+
+<table>
+  <tr>
+    <th>User ID</th>
+    <th>Service</th>
+    <th>Package</th>
+    <th>Pet</th>
+    <th>Date</th>
+    <th>Time</th>
+    <th>Status</th>
+    <th>Action</th>
+  </tr>
+
+  {% for b in bookings %}
+  <tr>
+    <td>{{ b.user_id }}</td>
+    <td>{{ b.service_type }}</td>
+    <td>{{ b.package_name }}</td>
+    <td>{{ b.pet_name }} ({{ b.pet_type }})</td>
+    <td>{{ b.start_date }}</td>
+    <td>{{ b.time_slot }}</td>
+    <td>
+      {% if b.status %}
+        <span class="status-cancelled">{{ b.status }}</span>
+      {% else %}
+        <span class="status-active">active</span>
+      {% endif %}
+    </td>
+    <td>
+      {% if not b.status %}
+      <button class="cancel-btn" onclick="adminCancelBooking('{{ b.id }}')">
+        Cancel
+      </button>
+      {% else %}
+        —
+      {% endif %}
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<script>
+function adminCancelBooking(bookingId) {
+  if (!confirm("Are you sure you want to cancel this booking?")) return;
+
+  fetch(`/services/admin/cancel-booking/${bookingId}/`, {
+    method: "POST",
+    headers: {
+      "X-CSRFToken": getCSRFToken()
+    }
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      alert("Booking cancelled");
+      location.reload();
+    } else {
+      alert(data.message || "Failed to cancel");
+    }
+  });
+}
+
+function getCSRFToken() {
+  let cookieValue = null;
+  const name = "csrftoken";
+  if (document.cookie && document.cookie !== "") {
+    const cookies = document.cookie.split(";");
+    for (let cookie of cookies) {
+      cookie = cookie.trim();
+      if (cookie.startsWith(name + "=")) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+
+  * {
+    box-sizing: border-box;
+    font-family: "Segoe UI", Arial, sans-serif;
+  }
+
+  body {
+    background: #f9fafb;
+    padding: 30px;
+    color: #2c3e50;
+  }
+
+  h1 {
+    margin-bottom: 25px;
+    text-align: center;
+    color: #ff6b6b;
+  }
+
+  /* TABLE CONTAINER */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  th, td {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  th {
+    background: #f1f5f9;
+    color: #374151;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+  }
+
+  tr:nth-child(even) {
+    background: #f9fafb;
+  }
+
+  tr:hover {
+    background: #fef2f2;
+  }
+
+  /* STATUS */
+  .status-active {
+    color: #16a34a;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  .status-cancelled {
+    color: #dc2626;
+    font-weight: 700;
+    text-transform: capitalize;
+  }
+
+  /* BUTTON */
+  .cancel-btn {
+    background: #ef4444;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .cancel-btn:hover {
+    background: #dc2626;
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.4);
+    transform: translateY(-1px);
+  }
+
+  /* MOBILE RESPONSIVE */
+  @media (max-width: 900px) {
+    table {
+      font-size: 13px;
+    }
+
+    th, td {
+      padding: 10px;
+    }
+
+    h1 {
+      font-size: 22px;
+    }
+  }
+

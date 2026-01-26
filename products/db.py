@@ -7,3 +7,5 @@ db = client["paws_and_claws"]
 products_collection = db["products"]
 cart_collection = db["cart"]
 
+
+
