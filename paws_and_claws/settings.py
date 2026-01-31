@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
+from decouple import config
 
 from pathlib import Path
 import os
@@ -130,5 +131,5 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/accounts/login/'
 
 
-MONGO_URI = "REMOVED_MONGO_URIREMOVED_MONGO_URI"
+MONGO_URI = config('MONGO_URI')
 
