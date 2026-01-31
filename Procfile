@@ -1,0 +1,1 @@
+web: gunicorn paws_and_claws.wsgi

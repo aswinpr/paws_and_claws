@@ -2,3 +2,6 @@ Django>=4.2,<6.0
 pymongo>=4.6
 python-decouple>=3.8
 dnspython>=2.4
+gunicorn
+djongo
+whitenoise
